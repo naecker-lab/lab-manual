@@ -1,3 +1,3 @@
-# RA Manual for @naecker-lab
+# RA Manual for Naecker Lab
 
-Training matierals will be posted here.  See the wiki for the lab manual.
+Training matierals will be posted here.  See the wiki for the lab manual. 
