@@ -1,0 +1,217 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green0\blue0;}
+\margl1440\margr1440\vieww15220\viewh15240\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs32 \cf2 \ul \ulc0 Git Cheat Sheet\cf0  => git works with changes, not files
+\b0\fs24 \ulnone \
+\ul Initializing a repository:\ulnone \
+
+\b git init
+\b0  => create git repository from directory\
+
+\b git add hello.rb
+\b0  => adds file to repository\
+
+\b git commit -m
+\b0  \'93First Commit\'94\
+\
+
+\b\fs28 \cf2 checking status:
+\b0\fs24 \cf0 \
+
+\b git status
+\b0  => checks status of repository\
+\
+
+\b\fs28 \cf2 staging changes and committing:
+\b0\fs24 \cf0 \ul \
+
+\b \ulnone git add hello.rb
+\b0  => git is now aware of the changes made to the file\
+\
+
+\b \cf2 committing
+\b0 :\cf0 \
+if file a.rg, b.rb, c.rb:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+git add a.rb\
+git add b.rb\
+git commit -m \'93Changes for a and b\'94\
+\
+git add c.rb\
+git commit -m \'93Unrelated change to c\'94\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+if git commit without -m, will be asked to put in the message for the commit\
+\
+If you change, then add, then change, only the first change will be saved when you commit\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 git add . 
+\b0 => adds all the changes to the files in the current directory\
+\
+
+\b\fs28 \cf2 History:
+\b0\fs24 \cf0 \
+
+\b git log
+\b0  => prints out listing of what changes have been made\
+git log \'97pretty=oneline => prints out history on single lines, easier to read\
+	after online can do => \'97max-count=2, \'97since=\'915 minutes ago\'92, \'97until = \'915 minutes ago\'92, git log \'97author=<name>, \'97all\
+\
+
+\b\fs28 \cf2 Aliases:
+\b0\fs24 \cf0 \
+Add aliases to .gitconfig file\
+\
+
+\b\fs28 \cf2 Getting old versions:
+\b0\fs24 \cf0 \
+
+\b git checkout
+\b0  <hashValue>\
+
+\b git checkout master
+\b0  => returns to latest version\
+\
+cat hello.rb => print out the file (from bash)\
+\
+
+\b\fs28 \cf2 Tagging versions: tagging for easy future reference
+\b0\fs24 \cf0 \
+
+\b git tag <tagName>
+\b0  => creates a label for current version\
+	ie. git tag v1\
+\
+can use 
+\b v1^
+\b0  to mean the first ancestor of v1\
+\
+git tag => see which tags are available\
+\
+git hist master \'97all => can see tags like this as well\
+\
+
+\b\fs28 \cf2 Undoing local changes (before staging):
+\b0\fs24 \cf0 \
+can undo changes before staging, simply checkout the repository\'92s version:\
+
+\b git checkout hello.rb
+\b0 \
+\
+
+\b\fs28 \cf2 Undoing stage changes(before committing):
+\b0\fs24 \cf0 \
+
+\b git reset HEAD hello.rb
+\b0  => moves the \'91head\'92 back to before changes, doesn\'92t revert file though, ned to do:\
+
+\b git checkout hello.rb
+\b0 \
+\
+
+\b\fs28 \cf2 Undoing committed changes:
+\b0\fs24 \cf0 \
+
+\b git revert HEAD
+\b0  => pop you into the editor, and should be reverted to original file\
+\
+
+\b\fs28 \cf2 Resetting changes, removing from log:
+\b0\fs24 \cf0 \
+git tag oops\
+
+\b git reset \'97hard <tag_of_point you want to return to>
+\b0 \
+Note: Not removed from master branch, so git hist \'97all would still show it\
+\
+
+\b\fs28 \cf2 Removing Tags\cf0 : 
+\b0\fs24 generally want to remove tags of changes that have been reset\
+
+\b git tag -d oops
+\b0  => remove oops tag\
+\
+
+\b\fs28 \cf2 Amending Commits:\cf0  
+\b0\fs24 Merging commits\
+git add hello.rb\
+
+\b git commit \'97amend -m \'93Add an author/email comment\'94
+\b0 \
+\
+
+\b\fs28 \cf2 Moving Files: 
+\b0\fs24 \cf0 \
+
+\b git mv hello.rb <location>
+\b0 \
+\
+
+\b\fs28 \cf2 .git Directory:\cf0    
+\b0\fs24 \
+
+\b ls -C .git
+\b0  => directory where all git \'93stuff\'94 is stored\
+
+\b cat .git/config
+\b0  => project-specific configuration file, changes here will override config entries from .gitconfig from home directory\
+\
+
+\b ls .git/refs
+\b0  => returns all references\
+
+\b ls .git/refs/heads
+\b0  => returns all heads\
+
+\b ls .git/refs/tags
+\b0  => returns all tags\
+
+\b cat .git/refs/tags/v1
+\b0  => returns hash of v1\
+\
+
+\b cat .git/HEAD
+\b0  => returns the reference to the current branch\
+\
+
+\b git hist \'97max-count=1
+\b0  => returns the latest commit made in repository\
+\
+Dumping latest commit:\
+
+\b git cat-file -t <hash>\
+git cat-file -p <hash>
+\b0 \
+\
+
+\b\fs28 \cf2 Creating/navigating branches:   
+\b0\fs24 \cf0 \
+If you modify files in different branches \
+\
+
+\b git checkout -b greet
+\b0  => creates a new branch \'91greet\'92\
+\
+
+\b git checkout master
+\b0  => switch between branches\
+\
+
+\b\fs28 \cf2 Merging branches\cf0 :   
+\b0\fs24 \
+
+\b git merge master
+\b0  => merge master into current branch\
+\
+Note: If conflict arises in merge, manually edit file\
+\
+\ul Rebase vs. merging:\ulnone \
+rebase makes log much easier to read\
+dont rebase if:\
+	branch is public and shared with others\
+	when exact history of commit branch is importnat}
